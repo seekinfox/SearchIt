@@ -39,6 +39,12 @@ nav {
       left: .5rem;
       top:20%;
       opacity: .7;
+
+      &:nth-of-type(2){
+        cursor: pointer;
+        left: auto;
+        right: .5rem;
+      }
     }
  }
 }
@@ -50,7 +56,6 @@ nav {
   max-height: 17rem;
   overflow-x: hidden;
   overflow-y:unset;
-
 }
 .em__box {
   padding: 2rem 1rem;

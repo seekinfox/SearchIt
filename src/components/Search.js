@@ -2,21 +2,37 @@ import React, { useState } from "react";
 import style from "./Search.module.scss";
 import { BsSearch } from "react-icons/bs";
 import { RiUserSearchFill } from "react-icons/ri";
-import Fuse from "fuse.js";
+// import Fuse from "fuse.js";
 import { GiDeadHead } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
 
 export default function Search({ users }) {
-  //const [suggestion, setSuggestion] = useState([]);
+  const [suggestion, setSuggestion] = useState([]);
   //set the input in state
   const [text, setText] = useState("");
+
+  // trigger onChange event
+
   const handlleSearch = (value) => {
+    let matches = [];
+    // filter text through the users
+    const regex = new RegExp(`${text}`, "gi");
+
+    if (text.length > 0) {
+      matches = users.filter((user) => {
+        return (
+          user.pincode.match(regex) +
+          user.id.match(regex) +
+          user.name.match(regex) +
+          user.address.match(regex)
+        );
+      });
+    }
+    setSuggestion(matches);
     setText(value);
   };
+  console.log(suggestion);
 
-  // using fuzzy search
-  const fuse = new Fuse(users, {
-    keys: ["id", "name", "items", "address", "pincode"]
-  });
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -38,29 +54,29 @@ export default function Search({ users }) {
               onChange={(e) => handlleSearch(e.target.value)}
             />
             <BsSearch />
+            <AiOutlineClose onClick={() => setText("")} />
           </label>
         </form>
         {text === "" ? (
           ""
         ) : (
           <div className={style.suggestion__list}>
-            {fuse.search(text).length === 0 ? (
+            {suggestion.length === 0 ? (
               <div className={style.em__box}>
                 <GiDeadHead />
                 found nothing
               </div>
             ) : (
-              fuse.search(text).map((i) => (
-                <div key={i.item.id} className={style.item}>
-                  <p>{i.item.id}</p>
-                  <p>{i.item.name}</p>
+              suggestion.map((i) => (
+                <div key={i.id} className={style.item}>
+                  <p>{i.id}</p>
+                  <p>{i.name}</p>
                   <p>
-                    <span>{i.item.address}</span> Pincode:{" "}
-                    <span>{i.item.pincode}</span>
+                    <span>{i.address}</span> Pincode: <span>{i.pincode}</span>
                   </p>
                   <ul>
                     <span>Cart</span>
-                    {i.item.items.map((i) => (
+                    {i.items.map((i) => (
                       <li>{i}</li>
                     ))}
                   </ul>
