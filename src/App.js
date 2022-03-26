@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Results } from "./components/Results";
 import Search from "./components/Search";
-import "./styles.css";
+import "./styles.scss";
 
 export default function App() {
   const [users, setUsers] = useState([]);
