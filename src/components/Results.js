@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import style from "./Results.module.scss";
 
 export const Results = ({ results, text }) => {

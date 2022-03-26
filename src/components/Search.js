@@ -30,13 +30,18 @@ export default function Search({ handleResults, users }) {
     setSuggestion(matches);
     setText(value);
   };
-  console.log(suggestion);
+  //console.log(suggestion);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setText("");
     // callback to the handleresults
     handleResults(suggestion, text);
+  };
+  //on click handle
+  const handleItem = (i) => {
+    setText("");
+    handleResults([i], text);
   };
 
   return (
@@ -70,7 +75,11 @@ export default function Search({ handleResults, users }) {
               </div>
             ) : (
               suggestion.map((i) => (
-                <div key={i.id} className={style.item}>
+                <div
+                  onClick={() => handleItem(i)}
+                  key={i.id}
+                  className={style.item}
+                >
                   <p>{i.id}</p>
                   <p>{i.name}</p>
                   <p>

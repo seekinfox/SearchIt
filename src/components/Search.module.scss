@@ -1,3 +1,5 @@
+@use "../styles/mixins" as m;
+
 nav {
   display: flex;
   flex-direction: column;
@@ -5,7 +7,10 @@ nav {
   align-items: center;
   padding: 1rem;
   > div {
-    width: 50%;
+    width: 80%;
+    @include m.desktop {
+      width: 50%;
+    }
   }
   > span {
     margin: 2rem;
@@ -43,6 +48,7 @@ nav {
         cursor: pointer;
         left: auto;
         right: .5rem;
+        opacity: .5;
       }
     }
  }
