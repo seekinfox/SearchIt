@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import style from "./Search.module.scss";
 import { BsSearch } from "react-icons/bs";
 import { RiUserSearchFill } from "react-icons/ri";
-// import Fuse from "fuse.js";
 import { GiDeadHead } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 
-export default function Search({ users }) {
+export default function Search({ handleResults, users }) {
   const [suggestion, setSuggestion] = useState([]);
   //set the input in state
   const [text, setText] = useState("");
@@ -35,6 +34,9 @@ export default function Search({ users }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setText("");
+    // callback to the handleresults
+    handleResults(suggestion, text);
   };
 
   return (
@@ -74,12 +76,6 @@ export default function Search({ users }) {
                   <p>
                     <span>{i.address}</span> Pincode: <span>{i.pincode}</span>
                   </p>
-                  <ul>
-                    <span>Cart</span>
-                    {i.items.map((i) => (
-                      <li>{i}</li>
-                    ))}
-                  </ul>
                 </div>
               ))
             )}

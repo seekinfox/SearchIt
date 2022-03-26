@@ -1,0 +1,41 @@
+.r__container {
+  padding: 0 2rem;
+  > span {
+    line-height: 4;
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+  }
+
+}
+
+.r__item {
+  margin-bottom: 2rem;
+  padding: .5rem 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  > ol {
+    width: max-content;
+    padding: 0 2rem;
+    >h4 {
+      text-transform: uppercase;
+    }
+     > li {
+       font-size:.9rem;
+       line-height: 2;
+     }
+  }
+
+  > p {
+    &:nth-of-type(1){
+      font-weight: bold;
+      > span {
+        opacity: .6;
+        margin-left: .5rem;
+      }
+    }
+    &:nth-of-type(2){
+      font-size: .9rem;
+      text-decoration:underline;
+    }
+  }
+}

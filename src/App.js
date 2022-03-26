@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Results } from "./components/Results";
 import Search from "./components/Search";
 import "./styles.css";
 
@@ -19,7 +20,7 @@ export default function App() {
         return response.json();
       })
       .then(function (myJson) {
-        //set to users
+        //set it to users state
         setUsers(myJson);
       });
   };
@@ -28,9 +29,21 @@ export default function App() {
     loadUsers();
   }, []);
 
+  // state for results
+  const [results, setResults] = useState([]);
+  const [rText, setRText] = useState("");
+  //getting data from search suggestions and text input
+  const handleResults = (suggestion, text) => {
+    console.log("handle", suggestion, text);
+    setResults(suggestion);
+    setRText(text);
+  };
+  console.log("results", results);
+
   return (
     <div className="App">
-      <Search users={users} />
+      <Search handleResults={handleResults} users={users} />
+      <Results results={results} text={rText} />
     </div>
   );
 }
