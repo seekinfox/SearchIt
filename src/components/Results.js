@@ -2,8 +2,8 @@ import React from "react";
 import style from "./Results.module.scss";
 
 export const Results = ({ results, text }) => {
-  console.log("REasults C", results, text);
-
+  //console.log("REasults C", results, text);
+  //if the reuslts are returned diaply results 
   return (
     <>
       {results.length > 0 ? (

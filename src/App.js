@@ -4,6 +4,7 @@ import Search from "./components/Search";
 import "./styles.scss";
 
 export default function App() {
+  //all users state
   const [users, setUsers] = useState([]);
 
   //load the data and set it in user state
@@ -16,11 +17,10 @@ export default function App() {
       }
     })
       .then(function (response) {
-        // console.log(response, "r");
         return response.json();
       })
       .then(function (myJson) {
-        //set it to users state
+        //set the results to users state
         setUsers(myJson);
       });
   };
@@ -29,16 +29,15 @@ export default function App() {
     loadUsers();
   }, []);
 
-  // state for results
+  // state for results and the input text 
   const [results, setResults] = useState([]);
   const [rText, setRText] = useState("");
+
   //getting data from search suggestions and text input
   const handleResults = (suggestion, text) => {
-    console.log("handle", suggestion, text);
     setResults(suggestion);
     setRText(text);
   };
-  console.log("results", results);
 
   return (
     <div className="App">

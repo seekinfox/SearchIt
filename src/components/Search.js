@@ -43,6 +43,10 @@ export default function Search({ handleResults, users }) {
     setText("");
     handleResults([i], text);
   };
+  //
+  const handleFocus = (e) => {
+    e.target.scrollIntoView(true)
+  }
 
   return (
     <nav>
@@ -75,17 +79,19 @@ export default function Search({ handleResults, users }) {
               </div>
             ) : (
               suggestion.map((i) => (
-                <div
+                <button
+                  aria-expanded="false"
                   onClick={() => handleItem(i)}
                   key={i.id}
                   className={style.item}
+                  onFocus={(e) => handleFocus(e)}
                 >
                   <p>{i.id}</p>
                   <p>{i.name}</p>
                   <p>
                     <span>{i.address}</span> Pincode: <span>{i.pincode}</span>
                   </p>
-                </div>
+                </button>
               ))
             )}
           </div>
